@@ -1,0 +1,11 @@
+{
+  "datacenter": "dc0",
+  "bootstrap_expect": 3,
+  "encrypt": "MyZCIzedsjB/l+ocIqwUWqQYfd1mJAdxpc8RQ6bUgz4=",
+  "log_level": "DEBUG",
+  "server": true,
+  "data_dir": "/var/consul",
+  "start_join": ["127.0.0.1"],
+  "client_addr": "0.0.0.0",
+  "disable_host_node_id": true
+}

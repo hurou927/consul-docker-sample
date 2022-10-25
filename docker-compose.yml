@@ -1,0 +1,43 @@
+version: "3.9"
+services:
+
+  server0:
+    container_name: sever0
+    restart: always
+    build: .
+    command: /usr/local/bin/consul agent -config-dir=/etc/consul.d/leader -ui
+    networks:
+      - consul-nw
+    ports:
+      - "8500:8500"
+      - "8600:8600/tcp"
+      - "8600:8600/udp"
+
+  server1:
+    container_name: sever1
+    restart: always
+    build: .
+    networks:
+      - consul-nw
+    command: /usr/local/bin/consul agent -config-dir=/etc/consul.d/server -ui
+
+  server2:
+    container_name: sever2
+    restart: always
+    build: .
+    networks:
+      - consul-nw
+    command: /usr/local/bin/consul agent -config-dir=/etc/consul.d/server -ui
+
+  client0:
+    container_name: client0
+    restart: always
+    build: .
+    networks:
+      - consul-nw
+    command: /usr/local/bin/consul agent -config-dir=/etc/consul.d/client
+
+
+networks:
+  consul-nw:
+    driver: bridge
