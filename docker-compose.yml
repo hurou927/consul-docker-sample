@@ -4,7 +4,7 @@ services:
   server0:
     container_name: sever0
     restart: always
-    build: .
+    build: ./consul
     command: /usr/local/bin/consul agent -config-dir=/etc/consul.d/leader -ui
     networks:
       - consul-nw
@@ -16,7 +16,7 @@ services:
   server1:
     container_name: sever1
     restart: always
-    build: .
+    build: ./consul
     networks:
       - consul-nw
     command: /usr/local/bin/consul agent -config-dir=/etc/consul.d/server -ui
@@ -24,7 +24,7 @@ services:
   server2:
     container_name: sever2
     restart: always
-    build: .
+    build: ./consul
     networks:
       - consul-nw
     command: /usr/local/bin/consul agent -config-dir=/etc/consul.d/server -ui
@@ -32,7 +32,7 @@ services:
   client0:
     container_name: client0
     restart: always
-    build: .
+    build: ./consul
     networks:
       - consul-nw
     command: /usr/local/bin/consul agent -config-dir=/etc/consul.d/client
