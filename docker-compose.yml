@@ -2,32 +2,52 @@ version: "3.9"
 services:
 
   server0:
-    container_name: sever0
+    container_name: server0
     restart: always
     build: ./consul
-    command: /usr/local/bin/consul agent -config-dir=/etc/consul.d/leader -ui
+    command:
+      - /bin/sh
+      - -c
+      - |
+        /common.sh
+        /usr/local/bin/consul agent -config-dir=/etc/consul.d/leader -ui
     networks:
       - consul-nw
     ports:
       - "8500:8500"
       - "8600:8600/tcp"
       - "8600:8600/udp"
+      - "19100:9100"
 
   server1:
-    container_name: sever1
+    container_name: server1
     restart: always
     build: ./consul
     networks:
       - consul-nw
-    command: /usr/local/bin/consul agent -config-dir=/etc/consul.d/server -ui
+    command:
+      - /bin/sh
+      - -c
+      - |
+        /common.sh
+        /usr/local/bin/consul agent -config-dir=/etc/consul.d/server -ui
+    ports:
+      - "19101:9100"
 
   server2:
-    container_name: sever2
+    container_name: server2
     restart: always
     build: ./consul
     networks:
       - consul-nw
-    command: /usr/local/bin/consul agent -config-dir=/etc/consul.d/server -ui
+    command:
+      - /bin/sh
+      - -c
+      - |
+        /common.sh
+        /usr/local/bin/consul agent -config-dir=/etc/consul.d/server -ui
+    ports:
+      - "19102:9100"
 
   client0:
     container_name: client0
@@ -35,7 +55,30 @@ services:
     build: ./consul
     networks:
       - consul-nw
-    command: /usr/local/bin/consul agent -config-dir=/etc/consul.d/client
+    command:
+      - /bin/sh
+      - -c
+      - |
+        /common.sh
+        /usr/local/bin/consul agent -config-dir=/etc/consul.d/client
+    ports:
+      - "19103:9100"
+
+  prometheus0:
+    container_name: prometheus0
+    restart: always
+    build: ./prometheus
+    networks:
+      - consul-nw
+    command:
+      - /bin/sh
+      - -c
+      - |
+        /common.sh
+        prometheus --config.file="/etc/prometheus.d/config.yml"
+    ports:
+      - "19104:9100"
+      - "19090:9090"
 
 
 networks:

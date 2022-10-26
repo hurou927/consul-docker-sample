@@ -8,6 +8,8 @@ RUN apt-get update && apt-get install -y \
     unzip \
     vim \
     wget \
+    prometheus \
+    prometheus-node-exporter \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
@@ -24,5 +26,7 @@ RUN mkdir -p /var/consul
 COPY ./server.json /etc/consul.d/server/config.json
 COPY ./client.json /etc/consul.d/client/config.json
 COPY ./leader.json /etc/consul.d/leader/config.json
+COPY --chmod=755 ./common.sh /
+
 
 # consul agent -config-dir=/etc/consul.d/server
