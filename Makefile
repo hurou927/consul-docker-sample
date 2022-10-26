@@ -15,3 +15,7 @@ ssh:
 
 sshprom:
 	docker compose exec prometheus0 /bin/bash
+
+open:
+	xdg-open http://127.0.0.1:8500
+	xdg-open http://127.0.0.1:19090

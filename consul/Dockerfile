@@ -21,11 +21,15 @@ RUN mv consul /usr/local/bin/
 RUN mkdir -p /etc/consul.d/server
 RUN mkdir -p /etc/consul.d/leader
 RUN mkdir -p /etc/consul.d/client
-RUN mkdir -p /var/consul
 
 COPY ./server.json /etc/consul.d/server/config.json
 COPY ./client.json /etc/consul.d/client/config.json
 COPY ./leader.json /etc/consul.d/leader/config.json
+
+COPY ./services/*.json /etc/consul.d/server/
+COPY ./services/*.json /etc/consul.d/client/
+COPY ./services/*.json /etc/consul.d/leader/
+
 COPY --chmod=755 ./common.sh /
 
 

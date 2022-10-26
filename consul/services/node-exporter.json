@@ -1,0 +1,13 @@
+{
+  "service": {
+    "name": "node-exporter",
+    "tags": ["node-exporter"],
+    "port": 9100,
+    "check": {
+      "http": "http://localhost:9100",
+      "method": "GET",
+      "interval": "10s",
+      "timeout": "1s"
+    }
+  }
+}
