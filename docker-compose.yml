@@ -10,7 +10,7 @@ services:
       - -c
       - |
         /common.sh
-        /usr/local/bin/consul agent -config-dir=/etc/consul.d/leader -ui
+        /usr/local/bin/consul agent -config-dir=/etc/consul.d/server -ui
     networks:
       - consul-nw
     ports:
@@ -60,7 +60,7 @@ services:
       - -c
       - |
         /common.sh
-        /usr/local/bin/consul agent -config-dir=/etc/consul.d/client
+        /usr/local/bin/consul agent -config-dir=/etc/consul.d/client -ui
     ports:
       - "19103:9100"
 

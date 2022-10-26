@@ -24,13 +24,11 @@ RUN mkdir -p /etc/consul.d/client
 
 COPY ./server.json /etc/consul.d/server/config.json
 COPY ./client.json /etc/consul.d/client/config.json
-COPY ./leader.json /etc/consul.d/leader/config.json
+# COPY ./leader.json /etc/consul.d/leader/config.json
 
 COPY ./services/*.json /etc/consul.d/server/
 COPY ./services/*.json /etc/consul.d/client/
-COPY ./services/*.json /etc/consul.d/leader/
+# COPY ./services/*.json /etc/consul.d/leader/
 
 COPY --chmod=755 ./common.sh /
 
-
-# consul agent -config-dir=/etc/consul.d/server
