@@ -1,6 +1,7 @@
 From ubuntu:jammy
 
-ARG version="1.13.3"
+ARG consul_version="1.13.3"
+ARG consul_exporter_version="0.8.0"
 
 RUN apt-get update && apt-get install -y \
     curl \
@@ -13,10 +14,15 @@ RUN apt-get update && apt-get install -y \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
-RUN wget https://releases.hashicorp.com/consul/${version}/consul_${version}_linux_amd64.zip && \
-  unzip consul_${version}_linux_amd64.zip
+RUN wget https://releases.hashicorp.com/consul/${consul_version}/consul_${consul_version}_linux_amd64.zip && \
+  unzip consul_${consul_version}_linux_amd64.zip
 
 RUN mv consul /usr/local/bin/
+
+RUN wget https://github.com/prometheus/consul_exporter/releases/download/v${consul_exporter_version}/consul_exporter-${consul_exporter_version}.linux-amd64.tar.gz && \
+  tar xf consul_exporter-${consul_exporter_version}.linux-amd64.tar.gz
+
+RUN mv consul_exporter-${consul_exporter_version}.linux-amd64/consul_exporter /usr/local/bin/
 
 RUN mkdir -p /etc/consul.d/server
 RUN mkdir -p /etc/consul.d/leader

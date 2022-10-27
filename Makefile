@@ -13,6 +13,9 @@ kill:
 ssh:
 	docker compose exec server0 /bin/bash
 
+sshcli:
+	docker compose exec client0 /bin/bash
+
 sshprom:
 	docker compose exec prometheus0 /bin/bash
 

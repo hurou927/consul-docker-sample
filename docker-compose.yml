@@ -18,6 +18,7 @@ services:
       - "8600:8600/tcp"
       - "8600:8600/udp"
       - "19100:9100"
+      - "19107:9107"
 
   server1:
     container_name: server1

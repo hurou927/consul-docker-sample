@@ -7,3 +7,4 @@ scrape_configs:
       - server: 'server0:8500'
         services:
           - 'node-exporter'
+          - 'consul-exporter'
