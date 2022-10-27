@@ -1,4 +1,4 @@
-# Consul Sample
+# ConsulxPromtheus Sample
 
 ```sh
 $ make run
