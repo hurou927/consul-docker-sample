@@ -1,0 +1,13 @@
+{
+  "service": {
+    "name": "consul-exporter",
+    "tags": ["consul-exporter"],
+    "port": 9107,
+    "check": {
+      "http": "http://localhost:9107",
+      "method": "GET",
+      "interval": "10s",
+      "timeout": "1s"
+    }
+  }
+}
